@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
@@ -7,17 +7,17 @@ dataSources:
     network: rinkeby
     source:
       address: "0xB753548F6E010e7e680BA186F9Ca1BdAB2E90cf2"
-      abi: PanopticPool
+      abi: PanopticFactory
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - OwnershipTransferred
+        - PanopticPool
       abis:
-        - name: PanopticPool
-          file: ./abis/PanopticPool.json
+        - name: PanopticFactory
+          file: ./abis/PanopticFactory.json
       eventHandlers:
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-      file: ./src/panoptic-pool.ts
+        - event: PoolDeployed(address,address)
+          handler: handlePoolDeployed
+      file: ./src/panoptic-factory.ts
