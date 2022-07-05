@@ -3,7 +3,7 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: PanopticPool
+    name: PanopticFactory
     network: rinkeby
     source:
       address: "0xB753548F6E010e7e680BA186F9Ca1BdAB2E90cf2"
@@ -21,3 +21,26 @@ dataSources:
         - event: PoolDeployed(address,address)
           handler: handlePoolDeployed
       file: ./src/panoptic-factory.ts
+  - kind: ethereum
+    name: SemiFungiblePositionManager
+    network: rinkeby
+    source:
+      address: "0xB753548F6E010e7e680BA186F9Ca1BdAB2E90cf2"
+      abi: SemiFungiblePositionManager
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - UserPositionIdList
+      abis:
+        - name: SemiFungiblePositionManager
+          file: ./abis/SemiFungiblePositionManager.json
+      eventHandlers:
+        - event: TokenizedPositionMinted(indexed address,uint256,uint128)
+          handler: handleTokenizedPositionMinted
+        - event: TokenizedPositionBurnt(indexed address,uint256,uint128)
+          handler: handleTokenizedPositionBurnt
+        - event: TokenizedPositionRolled(indexed address,uint256,uint256,uint128)
+          handler: handleTokenizedPositionRolled
+      file: ./src/semi-fungible-position-manager.ts

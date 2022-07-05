@@ -2,7 +2,7 @@ import { BigInt } from "@graphprotocol/graph-ts"
 import {
   PanopticFactory,
   PoolDeployed
-} from "../generated/PanopticPool/PanopticFactory"
+} from "../generated/PanopticFactory/PanopticFactory"
 import { PanopticPool } from "../generated/schema"
 
 export function handlePoolDeployed(event: PoolDeployed): void {

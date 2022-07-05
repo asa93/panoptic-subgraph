@@ -1,5 +1,66 @@
 [
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_sfpm",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Deposited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "positionID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount0Collected",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount1Collected",
+        "type": "uint256"
+      }
+    ],
+    "name": "FeesCollected",
+    "type": "event"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -19,15 +80,65 @@
     "type": "event"
   },
   {
+    "anonymous": false,
     "inputs": [
       {
-        "internalType": "contract TransparentUpgradeableProxy",
-        "name": "proxy",
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
         "type": "address"
       },
-      { "internalType": "address", "name": "newAdmin", "type": "address" }
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
     ],
-    "name": "changeProxyAdmin",
+    "name": "Withdrawn",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "COMMISSION_FEE",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DECIMALS",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "burnOptions",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -35,33 +146,300 @@
   {
     "inputs": [
       {
-        "internalType": "contract TransparentUpgradeableProxy",
-        "name": "proxy",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
         "type": "address"
       }
     ],
-    "name": "getProxyAdmin",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "deposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "isToken0",
+        "type": "bool"
+      }
+    ],
+    "name": "getUnlockedAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "contract TransparentUpgradeableProxy",
-        "name": "proxy",
-        "type": "address"
+        "internalType": "uint256[]",
+        "name": "positionIdList",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint128",
+        "name": "numberOfContracts",
+        "type": "uint128"
       }
     ],
-    "name": "getProxyImplementation",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "mintOptions",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC1155BatchReceived",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC1155Received",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "options",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "feesBase0",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "feesBase1",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "baseLiquidity",
+        "type": "uint128"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pool",
+    "outputs": [
+      {
+        "internalType": "contract IUniswapV3Pool",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "poolBalances",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "totalToken0CollectedFee",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "totalToken1CollectedFee",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "totalToken0InAMM",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint128",
+        "name": "totalToken1InAMM",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "positionBalance",
+    "outputs": [
+      {
+        "internalType": "uint128",
+        "name": "",
+        "type": "uint128"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "positionCounter",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "receiptToken0",
+    "outputs": [
+      {
+        "internalType": "contract ReceiptBase",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "receiptToken1",
+    "outputs": [
+      {
+        "internalType": "contract ReceiptBase",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -73,8 +451,101 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "sfpm",
+    "outputs": [
+      {
+        "internalType": "contract ISemiFungiblePositionManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
-      { "internalType": "address", "name": "newOwner", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_pool",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_receiptReference",
+        "type": "address"
+      }
+    ],
+    "name": "startPool",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tickSpacing",
+    "outputs": [
+      {
+        "internalType": "int24",
+        "name": "",
+        "type": "int24"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "token0",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "token1",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
     "name": "transferOwnership",
     "outputs": [],
@@ -84,34 +555,24 @@
   {
     "inputs": [
       {
-        "internalType": "contract TransparentUpgradeableProxy",
-        "name": "proxy",
-        "type": "address"
-      },
-      { "internalType": "address", "name": "implementation", "type": "address" }
-    ],
-    "name": "upgrade",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "contract TransparentUpgradeableProxy",
-        "name": "proxy",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
         "internalType": "address",
-        "name": "implementation",
+        "name": "token",
         "type": "address"
       },
-      { "internalType": "bytes", "name": "data", "type": "bytes" }
+      {
+        "internalType": "uint256[]",
+        "name": "positionIdList",
+        "type": "uint256[]"
+      }
     ],
-    "name": "upgradeAndCall",
+    "name": "withdraw",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]
