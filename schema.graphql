@@ -12,5 +12,6 @@ type TokenPosition @entity {
   id: ID! # tokenId+ userAddress
   user: User! # user entity
   tokenId: BigInt! # tokenId uint256
-  position: BigInt! # number of contracts uint256
+  position: BigInt # number of contracts uint256
+  endUser: String
 }
