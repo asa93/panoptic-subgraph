@@ -4,7 +4,6 @@ type PanopticPool @entity {
   uniSwapPool: Bytes! # address
 }
 
-
 type User @entity {
   id: ID! # userAddress
 }
