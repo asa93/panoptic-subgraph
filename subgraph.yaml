@@ -46,3 +46,22 @@ dataSources:
         - event: TokenizedPositionRolled(indexed address,uint256,uint256,uint128)
           handler: handleTokenizedPositionRolled
       file: ./src/semi-fungible-position-manager.ts
+templates:
+  - name: PanopticPool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: PanopticPool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/panopticpool.ts
+      entities:
+        - PanopticPool
+      abis:
+        - name: PanopticPool
+          file: ./abis/PanopticPool.json
+      eventHandlers:
+        - event: Deposited(address,address,uint256)
+          handler: handleTokenDeposited

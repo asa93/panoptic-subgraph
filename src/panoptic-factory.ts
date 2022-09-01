@@ -4,6 +4,7 @@ import {
   PoolDeployed,
 } from "../generated/PanopticFactory/PanopticFactory";
 import { PanopticPool } from "../generated/schema";
+import { PanopticPool as PanopticPoolContract } from "../generated/templates";
 
 export function handlePoolDeployed(event: PoolDeployed): void {
   // Entities can be loaded from the store using a string ID; this ID
@@ -21,9 +22,12 @@ export function handlePoolDeployed(event: PoolDeployed): void {
   // Entity fields can be set based on event parameters
   entity.poolAddress = event.params.poolAddress;
   entity.uniSwapPool = event.params.uniSwapPool;
-
+  entity.nbDeposits = 0;
   // Entities can be written to the store with `.save()`
   entity.save();
+
+  //index new contract
+  PanopticPoolContract.create(event.params.poolAddress);
 
   // Note: If a handler doesn't require existing field values, it is faster
   // _not_ to load the entity from the store. Instead, create it fresh with

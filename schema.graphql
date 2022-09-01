@@ -2,6 +2,7 @@ type PanopticPool @entity {
   id: ID!
   poolAddress: Bytes! # address
   uniSwapPool: Bytes! # address
+  nbDeposits: Int
 }
 
 type User @entity {
