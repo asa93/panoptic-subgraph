@@ -3,6 +3,8 @@ type PanopticPool @entity {
   poolAddress: Bytes! # address
   uniSwapPool: Bytes! # address
   nbDeposits: Int
+  token0: String
+  token1: String
 }
 
 type User @entity {
@@ -15,4 +17,10 @@ type TokenPosition @entity {
   tokenId: BigInt! # tokenId uint256
   position: BigInt # number of contracts uint256
   endUser: String
+}
+
+type UserDeposit @entity {
+  id: ID! #userAddress + poolAddress
+  token0Deposit: BigInt
+  token1Deposit: BigInt
 }

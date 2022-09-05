@@ -9,12 +9,12 @@ import { PanopticPool as PanopticPoolContract } from "../generated/templates";
 export function handlePoolDeployed(event: PoolDeployed): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = PanopticPool.load(event.transaction.from.toHex());
+  let entity = PanopticPool.load(event.params.poolAddress.toHex());
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
-    entity = new PanopticPool(event.transaction.from.toHex());
+    entity = new PanopticPool(event.params.poolAddress.toHex());
 
     // Entity fields can be set using simple assignments
   }

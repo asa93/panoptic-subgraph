@@ -65,3 +65,5 @@ templates:
       eventHandlers:
         - event: Deposited(address,address,uint256)
           handler: handleTokenDeposited
+        - event: PoolStarted()
+          handler: handlePoolStarted

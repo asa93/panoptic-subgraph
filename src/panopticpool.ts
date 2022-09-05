@@ -1,16 +1,36 @@
 import { BigInt } from "@graphprotocol/graph-ts";
 
-import { Deposited } from "../generated/templates/PanopticPool/PanopticPool";
-import { User, TokenPosition, PanopticPool } from "../generated/schema";
+import {
+  Deposited,
+  PoolStarted,
+} from "../generated/templates/PanopticPool/PanopticPool";
+import {
+  User,
+  TokenPosition,
+  PanopticPool,
+  UserDeposit,
+} from "../generated/schema";
 
-export function handleTokenDeposited(event: Deposited): void {
-  let panopticpool = PanopticPool.load(
-    "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"
-  );
+export function handlePoolStarted(event: PoolStarted): void {
+  let panopticPool = PanopticPool.load(event.address.toHex());
 
-  if (panopticpool) {
-    panopticpool.nbDeposits++;
-
-    panopticpool.save();
+  if (panopticPool) {
+    // panopticPool.token0 = event.params.token0.toHex();
+    panopticPool.token0 = "ahi";
+    panopticPool.save();
   }
+}
+export function handleTokenDeposited(event: Deposited): void {
+  const id = event.params.user.toHex() + event.address.toHex();
+
+  let userDeposit = UserDeposit.load(id);
+
+  //figure out if token0 or token1 with event.params.tokenAddress
+  if (userDeposit) {
+    userDeposit.token0Deposit = event.params.amount;
+  } else {
+    userDeposit = new UserDeposit(id);
+    userDeposit.token0Deposit = event.params.amount;
+  }
+  userDeposit.save();
 }
