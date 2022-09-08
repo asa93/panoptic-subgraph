@@ -11,12 +11,14 @@ import {
   UserDeposit,
 } from "../generated/schema";
 
+import { log } from "@graphprotocol/graph-ts";
+
 export function handlePoolStarted(event: PoolStarted): void {
   let panopticPool = PanopticPool.load(event.address.toHex());
 
   if (panopticPool) {
-    // panopticPool.token0 = event.params.token0.toHex();
-    panopticPool.token0 = "ahi";
+    panopticPool.token0 = event.params.token0.toHex();
+    panopticPool.token1 = event.params.token1.toHex();
     panopticPool.save();
   }
 }
