@@ -23,4 +23,12 @@ type UserDeposit @entity {
   id: ID! #userAddress + poolAddress
   token0Deposit: BigInt
   token1Deposit: BigInt
+  user: User
+  poolAddress: String
+}
+
+type Token @entity {
+  id: ID! # tokenAddress
+  name: String
+  symbol: String
 }

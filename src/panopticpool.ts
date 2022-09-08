@@ -9,6 +9,7 @@ import {
   TokenPosition,
   PanopticPool,
   UserDeposit,
+  Token,
 } from "../generated/schema";
 
 import { log } from "@graphprotocol/graph-ts";
@@ -16,10 +17,25 @@ import { log } from "@graphprotocol/graph-ts";
 export function handlePoolStarted(event: PoolStarted): void {
   let panopticPool = PanopticPool.load(event.address.toHex());
 
+  const token0Address = event.params.token0.toHex();
+  const token1Address = event.params.token1.toHex();
+
   if (panopticPool) {
-    panopticPool.token0 = event.params.token0.toHex();
-    panopticPool.token1 = event.params.token1.toHex();
+    panopticPool.token0 = token0Address;
+    panopticPool.token1 = token1Address;
     panopticPool.save();
+
+    //add tokens
+    let token0 = Token.load(token0Address);
+    if (!token0) {
+      token0 = new Token(token0Address);
+      token0.save();
+    }
+    let token1 = Token.load(token1Address);
+    if (!token1) {
+      token1 = new Token(token1Address);
+      token1.save();
+    }
   }
 }
 export function handleTokenDeposited(event: Deposited): void {
