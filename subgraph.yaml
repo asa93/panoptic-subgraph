@@ -6,9 +6,9 @@ dataSources:
     name: PanopticFactory
     network: mainnet
     source:
-      address: "0xB2b580ce436E6F77A5713D80887e14788Ef49c9A"
+      address: "0x1FdbDee07Df9e141A90736EDc4F0d59bC0EC54cA"
       abi: PanopticFactory
-      startBlock: 14487083
+      startBlock: 11343500
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,10 @@ dataSources:
     name: SemiFungiblePositionManager
     network: mainnet
     source:
-      address: "0xc582Bc0317dbb0908203541971a358c44b1F3766"
+      address: "0xa9Fa49E49b9FBF5A6Ff142e8B051502e154c7C92"
       abi: SemiFungiblePositionManager
-      startBlock: 14487083
+      startBlock: 11343500
+      #mainnet:14487083
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -63,7 +64,7 @@ templates:
         - name: PanopticPool
           file: ./abis/PanopticPool.json
       eventHandlers:
+        - event: PoolStarted(address,address)
+          handler: handlePoolStarted
         - event: Deposited(address,address,uint256)
           handler: handleTokenDeposited
-        - event: PoolStarted()
-          handler: handlePoolStarted
