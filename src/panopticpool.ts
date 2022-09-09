@@ -1,4 +1,4 @@
-import { BigInt } from "@graphprotocol/graph-ts";
+import { BigInt, ethereum } from "@graphprotocol/graph-ts";
 
 import {
   Deposited,
@@ -43,12 +43,18 @@ export function handleTokenDeposited(event: Deposited): void {
 
   let userDeposit = UserDeposit.load(id);
 
-  //figure out if token0 or token1 with event.params.tokenAddress
-  if (userDeposit) {
-    userDeposit.token0Deposit = event.params.amount;
-  } else {
+  if (!userDeposit) {
     userDeposit = new UserDeposit(id);
-    userDeposit.token0Deposit = event.params.amount;
+    userDeposit.token0Deposit = new BigInt(0);
+    userDeposit.token1Deposit = new BigInt(0);
+  }
+  //assemblyscript issue : ? operator not supported
+  let panopticPool = PanopticPool.load(event.address.toHex());
+  if (panopticPool) {
+    if (event.params.tokenAddress.toHex() === panopticPool.token0)
+      userDeposit.token0Deposit = event.params.amount;
+    else if (event.params.tokenAddress.toHex() === panopticPool.token1)
+      userDeposit.token1Deposit = event.params.amount;
   }
   userDeposit.save();
 }
