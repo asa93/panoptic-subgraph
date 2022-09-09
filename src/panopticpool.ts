@@ -84,6 +84,7 @@ export function handleTokenWithdrawn(event: Withdrawn): void {
       userDeposit.token1Deposit -= event.params.amount;
       panopticPool.totalDepositToken1 -= event.params.amount;
     }
+    panopticPool.save();
   }
 
   userDeposit.save();
