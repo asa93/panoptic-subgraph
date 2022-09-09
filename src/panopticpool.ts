@@ -3,6 +3,7 @@ import { BigInt, ethereum } from "@graphprotocol/graph-ts";
 import {
   Deposited,
   PoolStarted,
+  Withdrawn,
 } from "../generated/templates/PanopticPool/PanopticPool";
 import {
   User,
@@ -52,10 +53,38 @@ export function handleTokenDeposited(event: Deposited): void {
   let panopticPool = PanopticPool.load(event.address.toHex());
 
   if (panopticPool) {
-    if (event.params.tokenAddress.toHex() == panopticPool.token0)
+    if (event.params.tokenAddress.toHex() == panopticPool.token0) {
       userDeposit.token0Deposit += event.params.amount;
-    else if (event.params.tokenAddress.toHex() == panopticPool.token1)
+      panopticPool.totalDepositToken0 += event.params.amount;
+    } else if (event.params.tokenAddress.toHex() == panopticPool.token1) {
       userDeposit.token1Deposit += event.params.amount;
+      panopticPool.totalDepositToken1 += event.params.amount;
+    }
+
+    panopticPool.nbDeposits++;
+    panopticPool.save();
   }
+  userDeposit.save();
+}
+
+export function handleTokenWithdrawn(event: Withdrawn): void {
+  const id = event.params.user.toHex() + event.address.toHex();
+
+  let userDeposit = UserDeposit.load(id);
+
+  if (!userDeposit) return;
+  //assemblyscript issue : ? operator not supported
+  let panopticPool = PanopticPool.load(event.address.toHex());
+
+  if (panopticPool) {
+    if (event.params.tokenAddress.toHex() == panopticPool.token0) {
+      userDeposit.token0Deposit -= event.params.amount;
+      //panopticPool.totalDepositToken0 -= event.params.amount;
+    } else if (event.params.tokenAddress.toHex() == panopticPool.token1) {
+      //userDeposit.token1Deposit -= event.params.amount;
+      //panopticPool.totalDepositToken1 -= event.params.amount;
+    }
+  }
+
   userDeposit.save();
 }

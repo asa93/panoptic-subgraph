@@ -5,6 +5,8 @@ type PanopticPool @entity {
   nbDeposits: Int
   token0: String
   token1: String
+  totalDepositToken0: BigInt
+  totalDepositToken1: BigInt
 }
 
 type User @entity {
