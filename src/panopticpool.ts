@@ -79,10 +79,10 @@ export function handleTokenWithdrawn(event: Withdrawn): void {
   if (panopticPool) {
     if (event.params.tokenAddress.toHex() == panopticPool.token0) {
       userDeposit.token0Deposit -= event.params.amount;
-      //panopticPool.totalDepositToken0 -= event.params.amount;
+      panopticPool.totalDepositToken0 -= event.params.amount;
     } else if (event.params.tokenAddress.toHex() == panopticPool.token1) {
-      //userDeposit.token1Deposit -= event.params.amount;
-      //panopticPool.totalDepositToken1 -= event.params.amount;
+      userDeposit.token1Deposit -= event.params.amount;
+      panopticPool.totalDepositToken1 -= event.params.amount;
     }
   }
 
