@@ -237,7 +237,7 @@
     which "2.0.2"
     yaml "1.9.2"
 
-"@graphprotocol/graph-ts@0.27.0":
+"@graphprotocol/graph-ts@^0.27.0":
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.27.0.tgz#948fe1716f6082964a01a63a19bcbf9ac44e06ff"
   integrity sha512-r1SPDIZVQiGMxcY8rhFSM0y7d/xAbQf5vHMWUf59js1KgoyWpM6P3tczZqmQd7JTmeyNsDGIPzd9FeaxllsU4w==
@@ -467,6 +467,14 @@ assemblyscript@0.19.10:
     binaryen "101.0.0-nightly.20210723"
     long "^4.0.0"
 
+assemblyscript@0.21.3:
+  version "0.21.3"
+  resolved "https://registry.yarnpkg.com/assemblyscript/-/assemblyscript-0.21.3.tgz#7cd8fa95b856a91391c739cf9b9a4b8c77588c3e"
+  integrity sha512-DqA9/3uJeL/YceLu5yNT9nIk+6NOPqQDEgZFNrgLgYBpCapUDd3lSyz//566K1jcMHtH+e+NHyS6XBYrQE73nQ==
+  dependencies:
+    binaryen "109.0.0-nightly.20220831"
+    long "^5.2.0"
+
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
@@ -553,6 +561,11 @@ binaryen@101.0.0-nightly.20210723:
   version "101.0.0-nightly.20210723"
   resolved "https://registry.yarnpkg.com/binaryen/-/binaryen-101.0.0-nightly.20210723.tgz#b6bb7f3501341727681a03866c0856500eec3740"
   integrity sha512-eioJNqhHlkguVSbblHOtLqlhtC882SOEPKmNFZaDuz1hzQjolxZ+eu3/kaS10n3sGPONsIZsO7R9fR00UyhEUA==
+
+binaryen@109.0.0-nightly.20220831:
+  version "109.0.0-nightly.20220831"
+  resolved "https://registry.yarnpkg.com/binaryen/-/binaryen-109.0.0-nightly.20220831.tgz#d512918068c926e6fca8b32b1203b2d027aade4b"
+  integrity sha512-fy3zefoIq9tsZ00wlk2VcyYnJg2WQXi4IPH9LddUcFpxQXagzMvijkgCUX37MhmTP48WdLJ5jpZ9h/58HijovA==
 
 bindings@^1.5.0:
   version "1.5.0"
@@ -1402,9 +1415,9 @@ glob@^7.1.3:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-"gluegun@git+https://github.com/edgeandnode/gluegun.git#v4.3.1-pin-colors-dep":
+"gluegun@https://github.com/edgeandnode/gluegun#v4.3.1-pin-colors-dep":
   version "4.3.1"
-  resolved "git+https://github.com/edgeandnode/gluegun.git#b34b9003d7bf556836da41b57ef36eb21570620a"
+  resolved "https://github.com/edgeandnode/gluegun#b34b9003d7bf556836da41b57ef36eb21570620a"
   dependencies:
     apisauce "^1.0.1"
     app-module-path "^2.2.0"
@@ -2128,6 +2141,11 @@ long@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
   integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
+
+long@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-5.2.0.tgz#2696dadf4b4da2ce3f6f6b89186085d94d52fd61"
+  integrity sha512-9RTUNjK60eJbx3uz+TEGF7fUr29ZDxR5QzXcyDpeSfeH28S9ycINflOgOlppit5U+4kNTe83KQnMEerw7GmE8w==
 
 looper@^3.0.0:
   version "3.0.0"

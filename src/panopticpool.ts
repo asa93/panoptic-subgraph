@@ -50,11 +50,12 @@ export function handleTokenDeposited(event: Deposited): void {
   }
   //assemblyscript issue : ? operator not supported
   let panopticPool = PanopticPool.load(event.address.toHex());
+
   if (panopticPool) {
-    if (event.params.tokenAddress.toHex() === panopticPool.token0)
-      userDeposit.token0Deposit = event.params.amount;
-    else if (event.params.tokenAddress.toHex() === panopticPool.token1)
-      userDeposit.token1Deposit = event.params.amount;
+    if (event.params.tokenAddress.toHex() == panopticPool.token0)
+      userDeposit.token0Deposit += event.params.amount;
+    else if (event.params.tokenAddress.toHex() == panopticPool.token1)
+      userDeposit.token1Deposit += event.params.amount;
   }
   userDeposit.save();
 }
