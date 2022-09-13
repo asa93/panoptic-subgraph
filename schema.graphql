@@ -7,6 +7,7 @@ type PanopticPool @entity {
   token1: String
   totalDepositToken0: BigInt
   totalDepositToken1: BigInt
+  totalVolume: BigInt
 }
 
 type User @entity {
@@ -33,4 +34,12 @@ type Token @entity {
   id: ID! # tokenAddress
   name: String
   symbol: String
+}
+
+#we have to track UniswapV3 prices to retrieve ETH/USD value
+type UniswapV3Pool @entity {
+  id: ID! # poolAddress
+  token0: String!
+  token1: String!
+  token0price: String!
 }

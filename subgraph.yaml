@@ -6,9 +6,9 @@ dataSources:
     name: PanopticFactory
     network: mainnet
     source:
-      address: "0xE476B6a94960bc376BFC796A6B4EF4d0397Dfa7F"
+      address: "0x5bB0902B7623201222a15e6EcF036791dfC79759"
       abi: PanopticFactory
-      startBlock: 11350750
+      startBlock: 11373509
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,9 +26,9 @@ dataSources:
     name: SemiFungiblePositionManager
     network: mainnet
     source:
-      address: "0xfF240C239356605D49B6593c75D78b79854B5783"
+      address: "0x7BAdBfa6A5413C7fc6e937ce89E72cC2B4bf0fAf"
       abi: SemiFungiblePositionManager
-      startBlock: 11350750
+      startBlock: 11373509
       #mainnet:14487083
     mapping:
       kind: ethereum/events
@@ -70,3 +70,21 @@ templates:
           handler: handleTokenDeposited
         - event: Withdrawn(address,address,uint256)
           handler: handleTokenWithdrawn
+  - name: UniswapV3Pool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: UniswapV3Pool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/uniswapV3pool.ts
+      entities:
+        - UniswapV3Pool
+      abis:
+        - name: UniswapV3Pool
+          file: ./abis/UniswapV3Pool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24)
+          handler: handlePoolStarted
