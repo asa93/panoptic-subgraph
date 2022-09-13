@@ -22,7 +22,7 @@ export function handlePoolDeployed(event: PoolDeployed): void {
   // Entity fields can be set based on event parameters
   entity.poolAddress = event.params.poolAddress;
   entity.uniSwapPool = event.params.uniSwapPool;
-  entity.nbDeposits = 0;
+  entity.totalVolume = new BigInt(0);
   entity.totalDepositToken0 = new BigInt(0);
   entity.totalDepositToken1 = new BigInt(10);
   // Entities can be written to the store with `.save()`

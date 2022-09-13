@@ -2,7 +2,6 @@ type PanopticPool @entity {
   id: ID!
   poolAddress: Bytes! # address
   uniSwapPool: Bytes! # address
-  nbDeposits: Int
   token0: String
   token1: String
   totalDepositToken0: BigInt
