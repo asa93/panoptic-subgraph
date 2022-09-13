@@ -1,12 +1,19 @@
 type PanopticPool @entity {
-  id: ID!
+  id: ID! #poolAddress
   poolAddress: Bytes! # address
   uniSwapPool: Bytes! # address
   token0: String
   token1: String
   totalDepositToken0: BigInt
   totalDepositToken1: BigInt
-  totalVolume: BigInt
+  totalVolumeToken0: BigInt
+  totalVolumeToken1: BigInt
+}
+
+# Data accumulated and condensed into day stats for each pool
+type PanopticPoolDayData @entity {
+  id: ID! #poolAddress
+  totalVolumeToken0: BigInt
 }
 
 type User @entity {
@@ -30,9 +37,14 @@ type UserDeposit @entity {
 }
 
 type Token @entity {
-  id: ID! # tokenAddress
+  id: ID! #tokenAddress
   name: String
   symbol: String
+  totalVolume: BigInt
+}
+# Data accumulated and condensed into day stats for each pool
+type TokenDayData @entity {
+  id: ID! #tokenAddress
   totalVolume: BigInt
 }
 
