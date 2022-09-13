@@ -21,7 +21,7 @@ dataSources:
       eventHandlers:
         - event: PoolDeployed(address,address)
           handler: handlePoolDeployed
-      file: ./src/panoptic-factory.ts
+      file: ./src/mapping/panoptic-factory.ts
   - kind: ethereum
     name: SemiFungiblePositionManager
     network: mainnet
@@ -46,7 +46,7 @@ dataSources:
           handler: handleTokenizedPositionBurnt
         - event: TokenizedPositionRolled(indexed address,uint256,uint256,uint128)
           handler: handleTokenizedPositionRolled
-      file: ./src/semi-fungible-position-manager.ts
+      file: ./src/mapping/semi-fungible-position-manager.ts
 templates:
   - name: PanopticPool
     kind: ethereum/contract
@@ -57,7 +57,7 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: ./src/panopticpool.ts
+      file: ./src/mapping/panopticpool.ts
       entities:
         - PanopticPool
       abis:
@@ -79,7 +79,7 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: ./src/uniswapV3pool.ts
+      file: ./src/mapping/uniswapV3pool.ts
       entities:
         - UniswapV3Pool
       abis:

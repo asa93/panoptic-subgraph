@@ -4,8 +4,8 @@ import {
   TokenizedPositionMinted,
   TokenizedPositionBurnt,
   TokenizedPositionRolled,
-} from "../generated/SemiFungiblePositionManager/SemiFungiblePositionManager";
-import { User, TokenPosition } from "../generated/schema";
+} from "../../generated/SemiFungiblePositionManager/SemiFungiblePositionManager";
+import { User, TokenPosition } from "../../generated/schema";
 
 export function createUserTokenPositionIfNotExisted(
   id: string,

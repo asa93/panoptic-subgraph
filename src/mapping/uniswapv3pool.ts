@@ -4,7 +4,7 @@ import {
   Deposited,
   PoolStarted,
   Withdrawn,
-} from "../generated/templates/PanopticPool/PanopticPool";
+} from "../../generated/templates/PanopticPool/PanopticPool";
 import {
   User,
   TokenPosition,
@@ -12,6 +12,6 @@ import {
   UserDeposit,
   Token,
   UniswapV3Pool,
-} from "../generated/schema";
+} from "../../generated/schema";
 
 // export function handleSwap(event: PoolStarted): void {}

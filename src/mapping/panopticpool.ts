@@ -4,14 +4,14 @@ import {
   Deposited,
   PoolStarted,
   Withdrawn,
-} from "../generated/templates/PanopticPool/PanopticPool";
+} from "../../generated/templates/PanopticPool/PanopticPool";
 import {
   User,
   TokenPosition,
   PanopticPool,
   UserDeposit,
   Token,
-} from "../generated/schema";
+} from "../../generated/schema";
 
 import { log } from "@graphprotocol/graph-ts";
 

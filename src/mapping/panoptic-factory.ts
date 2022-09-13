@@ -2,9 +2,9 @@ import { BigInt } from "@graphprotocol/graph-ts";
 import {
   PanopticFactory,
   PoolDeployed,
-} from "../generated/PanopticFactory/PanopticFactory";
-import { PanopticPool } from "../generated/schema";
-import { PanopticPool as PanopticPoolContract } from "../generated/templates";
+} from "../../generated/PanopticFactory/PanopticFactory";
+import { PanopticPool } from "../../generated/schema";
+import { PanopticPool as PanopticPoolContract } from "../../generated/templates";
 
 export function handlePoolDeployed(event: PoolDeployed): void {
   // Entities can be loaded from the store using a string ID; this ID
