@@ -30,11 +30,13 @@ export function handlePoolStarted(event: PoolStarted): void {
     let token0 = Token.load(token0Address);
     if (!token0) {
       token0 = new Token(token0Address);
+      token0.totalVolume = new BigInt(0);
       token0.save();
     }
     let token1 = Token.load(token1Address);
     if (!token1) {
       token1 = new Token(token1Address);
+      token1.totalVolume = new BigInt(0);
       token1.save();
     }
   }
@@ -49,7 +51,8 @@ export function handleTokenDeposited(event: Deposited): void {
     userDeposit.token0Deposit = new BigInt(0);
     userDeposit.token1Deposit = new BigInt(0);
   }
-  //assemblyscript issue : ? operator not supported
+
+  // update pool
   let panopticPool = PanopticPool.load(event.address.toHex());
 
   if (panopticPool) {
@@ -64,6 +67,12 @@ export function handleTokenDeposited(event: Deposited): void {
 
     panopticPool.save();
   }
+  //update token
+  let token = Token.load(event.params.tokenAddress.toHex());
+  if (token) {
+    token.totalVolume += event.params.amount;
+  }
+
   userDeposit.save();
 }
 
@@ -73,7 +82,7 @@ export function handleTokenWithdrawn(event: Withdrawn): void {
   let userDeposit = UserDeposit.load(id);
 
   if (!userDeposit) return;
-  //assemblyscript issue : ? operator not supported
+
   let panopticPool = PanopticPool.load(event.address.toHex());
 
   if (panopticPool) {
@@ -86,6 +95,11 @@ export function handleTokenWithdrawn(event: Withdrawn): void {
       panopticPool.totalDepositToken1 -= event.params.amount;
     }
     panopticPool.save();
+  }
+
+  let token = Token.load(event.params.tokenAddress.toHex());
+  if (token) {
+    token.totalVolume += event.params.amount;
   }
 
   userDeposit.save();

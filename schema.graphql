@@ -33,6 +33,7 @@ type Token @entity {
   id: ID! # tokenAddress
   name: String
   symbol: String
+  totalVolume: BigInt
 }
 
 #we have to track UniswapV3 prices to retrieve ETH/USD value
