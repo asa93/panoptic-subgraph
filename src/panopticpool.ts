@@ -71,6 +71,7 @@ export function handleTokenDeposited(event: Deposited): void {
   let token = Token.load(event.params.tokenAddress.toHex());
   if (token) {
     token.totalVolume += event.params.amount;
+    token.save();
   }
 
   userDeposit.save();
@@ -100,6 +101,7 @@ export function handleTokenWithdrawn(event: Withdrawn): void {
   let token = Token.load(event.params.tokenAddress.toHex());
   if (token) {
     token.totalVolume += event.params.amount;
+    token.save();
   }
 
   userDeposit.save();
