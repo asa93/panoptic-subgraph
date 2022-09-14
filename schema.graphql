@@ -13,7 +13,9 @@ type PanopticPool @entity {
 # Data accumulated and condensed into day stats for each pool
 type PanopticPoolDayData @entity {
   id: ID! #poolAddress
-  totalVolumeToken0: BigInt
+  date: Int! #timestamp rounded to current day by dividing by 86400
+  volumeToken0: BigInt
+  volumeToken1: BigInt
 }
 
 type User @entity {
@@ -45,6 +47,7 @@ type Token @entity {
 # Data accumulated and condensed into day stats for each pool
 type TokenDayData @entity {
   id: ID! #tokenAddress
+  date: Int! #timestamp rounded to current day by dividing by 86400
   totalVolume: BigInt
 }
 
