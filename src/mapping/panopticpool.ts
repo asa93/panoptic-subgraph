@@ -13,7 +13,10 @@ import {
   Token,
 } from "../../generated/schema";
 
-import { updatepanopticPoolDayData } from "../utils/dayInterval";
+import {
+  updatepanopticPoolDayData,
+  updateTokenDayData,
+} from "../utils/dayInterval";
 import { log } from "@graphprotocol/graph-ts";
 
 export function handlePoolStarted(event: PoolStarted): void {
@@ -77,6 +80,10 @@ export function handleTokenDeposited(event: Deposited): void {
   if (token) {
     token.totalVolume += event.params.amount;
     token.save();
+
+    let tokenDayData = updateTokenDayData(event);
+    tokenDayData.volume += event.params.amount;
+    tokenDayData.save();
   }
 
   userDeposit.save();
@@ -114,6 +121,10 @@ export function handleTokenWithdrawn(event: Withdrawn): void {
   if (token) {
     token.totalVolume += event.params.amount;
     token.save();
+
+    let tokenDayData = updateTokenDayData(event);
+    tokenDayData.volume += event.params.amount;
+    tokenDayData.save();
   }
 
   userDeposit.save();

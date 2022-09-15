@@ -48,7 +48,7 @@ type Token @entity {
 type TokenDayData @entity {
   id: ID! #tokenAddress
   date: Int! #timestamp rounded to current day by dividing by 86400
-  totalVolume: BigInt
+  volume: BigInt
 }
 
 #we have to track UniswapV3 prices to retrieve ETH/USD value
