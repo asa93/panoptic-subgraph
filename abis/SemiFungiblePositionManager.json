@@ -60,6 +60,12 @@
         "internalType": "uint128",
         "name": "numberOfContracts",
         "type": "uint128"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       }
     ],
     "name": "TokenizedPositionBurnt",

@@ -48,7 +48,6 @@ export function handleTokenizedPositionMinted(
   tokenPosition.position = event.params.numberOfContracts;
   tokenPosition.tokenId = event.params.tokenId;
   tokenPosition.user = event.params.recipient.toHex();
-  //tokenPosition.endUser = event.params.endUser.toHex();
   tokenPosition.save();
 
   // Note: If a handler doesn't require existing field values, it is faster
