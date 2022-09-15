@@ -85,6 +85,12 @@
         "internalType": "uint128",
         "name": "numberOfContracts",
         "type": "uint128"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       }
     ],
     "name": "TokenizedPositionMinted",
@@ -116,6 +122,12 @@
         "internalType": "uint128",
         "name": "numberOfContracts",
         "type": "uint128"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       }
     ],
     "name": "TokenizedPositionRolled",
@@ -289,6 +301,12 @@
       {
         "internalType": "address",
         "name": "recipient",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
         "type": "address"
       }
     ],

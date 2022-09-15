@@ -26,9 +26,9 @@ dataSources:
     name: SemiFungiblePositionManager
     network: mainnet
     source:
-      address: "0x7BAdBfa6A5413C7fc6e937ce89E72cC2B4bf0fAf"
+      address: "0x901DCC8Cbd04FbDcdf215b27F42b4Eb685FAA8f9"
       abi: SemiFungiblePositionManager
-      startBlock: 11373509
+      startBlock: 11383890
       #mainnet:14487083
     mapping:
       kind: ethereum/events
@@ -40,11 +40,11 @@ dataSources:
         - name: SemiFungiblePositionManager
           file: ./abis/SemiFungiblePositionManager.json
       eventHandlers:
-        - event: TokenizedPositionMinted(indexed address,uint256,uint128)
+        - event: TokenizedPositionMinted(indexed address,uint256,uint128,address)
           handler: handleTokenizedPositionMinted
-        - event: TokenizedPositionBurnt(indexed address,uint256,uint128)
+        - event: TokenizedPositionBurnt(indexed address,uint256,uint128,address)
           handler: handleTokenizedPositionBurnt
-        - event: TokenizedPositionRolled(indexed address,uint256,uint256,uint128)
+        - event: TokenizedPositionRolled(indexed address,uint256,uint256,uint128,address)
           handler: handleTokenizedPositionRolled
       file: ./src/mapping/semi-fungible-position-manager.ts
 templates:
