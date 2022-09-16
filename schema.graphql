@@ -1,11 +1,11 @@
 type PanopticPool @entity {
   id: ID! #poolAddress
   poolAddress: Bytes! # address
-  uniSwapPool: Bytes! # address
+  uniSwapPool: Bytes # address
   token0: String
   token1: String
-  totalDepositToken0: BigInt
-  totalDepositToken1: BigInt
+  tvlToken0: BigInt #total value locked
+  tvlToken1: BigInt #total value locked
   totalVolumeToken0: BigInt
   totalVolumeToken1: BigInt
 }
@@ -16,6 +16,7 @@ type PanopticPoolDayData @entity {
   date: Int! #timestamp rounded to current day by dividing by 86400
   volumeToken0: BigInt
   volumeToken1: BigInt
+  poolAddress: Bytes
 }
 
 type User @entity {
@@ -43,12 +44,14 @@ type Token @entity {
   name: String
   symbol: String
   totalVolume: BigInt
+  totalValueLocked: BigInt
 }
 # Data accumulated and condensed into day stats for each pool
 type TokenDayData @entity {
-  id: ID! #tokenAddress
+  id: ID! #tokenAddress + timestamp
   date: Int! #timestamp rounded to current day by dividing by 86400
   volume: BigInt
+  address: Bytes #token address
 }
 
 #we have to track UniswapV3 prices to retrieve ETH/USD value
